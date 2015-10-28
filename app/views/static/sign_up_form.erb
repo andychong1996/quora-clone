@@ -1,0 +1,49 @@
+<header>
+  Say Hi To Cuorora
+</header>
+
+<div id="sign_up_div">
+  <form action="/sign_up" method="post">
+    <p>
+      <label>First Name: </label>
+      <input type="text" name="user[first_name]" placeholder="First Name" data-validation="length" data-validation-length="min2" required>
+    </p>
+    <p>
+      <label>Last Name: </label>
+      <input type="text" name="user[last_name]" placeholder="Last Name" data-validation="length" data-validation-length="min2" required>
+    </p>
+    <p>
+      <label>User Name: </label>
+      <input type="text" name="user[user_name]" placeholder="User Name" data-validation="length" data-validation-length="min2" required>
+    </p>
+    <p>
+      <label>Gender: </label>
+      <input type="radio" name="user[gender]" value="male" checked>Male
+      <input type="radio" name="user[gender]" value="female" checked>Female
+    </p>
+    <p>
+      <label>Email: </label>
+      <input type="email" name="user[email]" placeholder="Email Address" data-validation="email" data-validation-error-msg="You did not enter a valid e-mail">
+    </p>
+    <p>
+      <label>Password: </label>
+      <input type="password" name="user[password]" value="">
+    </p>
+    <p>
+      <label>Confirm Password: </label>
+      <input type="password" name="password" value="">
+    </p>
+  </form>
+  <p>
+    <input type="submit" value="Sign Up">
+  </p>
+</div>
+
+<script>
+  $.validate({
+    module : 'html5'
+    validateOnBlur : false, // disable validation when input looses focus
+    errorMessagePosition : 'top' // Instead of 'element' which is default
+    scrollToTopOnError : false // Set this property to true if you have a long form
+  });
+</script>

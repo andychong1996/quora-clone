@@ -1,2 +1,26 @@
-<h1>Hello World</h1>
-<p>See Me in views/static/index.html.erb</p>
+<header>
+    <div id="title_div">
+        <p id="title">
+          WELCOME TO QUORORA
+        </p>
+    </div>
+</header>
+
+<div id="login_signup_container">
+  <a href="/"><img src="/img/index page/quorora.png" alt="main page icon" /></a>
+  <form id="login_form" action="/sign_in" method="post">
+    <p>
+      <input type="email" name="user[email]" placeholder="Email Address" required>
+    </p>
+    <p>
+      <input type="password" name="user[password]" placeholder="Password" required>
+    </p>
+    <p>
+      <input type="submit" value="SIGN IN">
+    </p>
+
+  </form>
+  <p>
+    <a href="/sign_up_form">Don't have a account? No worry, Sign Up HERE!</a>
+  </p>
+</div>
