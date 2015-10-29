@@ -1,0 +1,38 @@
+<li>
+
+  <a href="/questions/<%=@question.id%>">
+    <div>
+      <h3><%= @question.data %>
+        <span>
+          <a href="/question/upvote"><button type="button" name="button">UP VOTE</button></a>
+          <a href="/question/downvote"><button type="button" name="button">DOWN VOTE</button></a>
+        </span>
+    </h3>
+
+      <p>Author: <%=@question.user.first_name%></p>
+    </div>
+    <div>
+      <ol>
+        <% @question.answers.each do |answer| %>
+          <li><%= answer.data%></li>
+            <ul>Author: <%=answer.user.first_name%>
+              <span>
+                <a href="/answer/upvote"><button type="button" name="button">UP VOTE</button></a>
+                <a href="/answer/downvote"><button type="button" name="button">DOWN VOTE</button></a>
+              </span>
+            </ul>
+        <% end %>
+      </ol>
+    </div>
+  </a>
+  <%if logged_in?%>
+
+    <form action="/question/<%= @question.id %>/answers/create" method="post">
+        <input type="text" name="answer[data]" placeholder="Insert your answer here" required>
+        <button type="submit" name="button">Post</button>
+    </form>
+
+  <%else%>
+  <a href="/"><button type="button" name="button">Please Log In To Post Answer</button></a>
+  <%end%>
+</li>

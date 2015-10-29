@@ -11,30 +11,8 @@
   <h2>Top Stories:</h2>
   <div>
     <% @all_questions.each do |question| %>
-    <a href="/questions/<%=question.id%>">
-    <li>
-      <div>
-        <h4><%= question.data %></h4>
-        <p>Author: <%=question.user.first_name%></p>
-      </div>
-      <div>
-        <ol>
-          <% question.answers.each do |answer| %>
-            <li><%= answer.data%></li>
-              <ul>Author: <%=answer.user.first_name%></ul>
-          <% end %>
-        </ol>
-      </div>
-      <%if logged_in?%>
-        <form action="/question/<%= question.id %>/answers/create" method="post">
-            <input type="text" name="answer[data]" placeholder="Insert your answer here" required>
-            <button type="submit" name="button">Post</button>
-        </form>
-      <%else%>
-      <a href="/"><button type="button" name="button">Please Log In To Post Answer</button></a>
-      <%end%>
-    </li>
-    </a>
+      <% @question = question %>
+      <%= erb :questions_loop %>
     <% end %>
   </div>
 </div>
