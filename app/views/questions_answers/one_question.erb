@@ -1,0 +1,13 @@
+<header>
+  <h2><%= @current_question.data %></h2>
+</header>
+
+<div>
+  <% @current_question.answers.each do |answer| %>
+    <p>
+      <%= answer.data %>
+    </p>
+  <%end%>
+</div>
+<footer>
+</footer>

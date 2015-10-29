@@ -6,5 +6,17 @@ class User < ActiveRecord::Base
     validates :email, presence: true, uniqueness: true, format: {with: /@/}
     validates :password, presence: true, length: {in: 5..32}
 
-    has_many :questions, :answers
+    has_many :questions
+    has_many :answers
+
+    def self.authenticate(email, password)
+      return nil unless user = User.find_by(email: email)
+
+      if user.password == password
+        return user
+      else
+        return nil
+      end
+    end
+
 end

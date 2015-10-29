@@ -1,0 +1,32 @@
+<header>
+  <h2>Your Answered Questions: </h2>
+</header>
+
+<div>
+
+  <% @questions.each do |question| %>
+  <li>
+    <div>
+      <h4><%= question.data %></h4>
+      <p>Author: <%=question.user.first_name%></p>
+    </div>
+    <div>
+      <ol>
+        <% question.answers.each do |answer| %>
+          <li><%= answer.data%></li>
+            <ul>Author: <%=answer.user.first_name%></ul>
+        <% end %>
+      </ol>
+    </div>
+    <%if logged_in?%>
+      <form action="/question/<%= question.id %>/answers/create" method="post">
+          <input type="text" name="answer[data]" placeholder="Insert your answer here" required>
+          <button type="submit" name="button">Post</button>
+      </form>
+    <%else%>
+    <a href="/"><button type="button" name="button">Please Log In To Post Answer</button></a>
+    <%end%>
+  </li>
+  <% end %>
+</div>
+<footer></footer>
