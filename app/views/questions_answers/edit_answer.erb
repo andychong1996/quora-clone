@@ -1,0 +1,11 @@
+<header>
+  <h1>Edit Answer</h1>
+</header>
+
+<div>
+  <form class="" action="/answers/<%= @current_answer.id %>" method="post">
+    <input type="hidden" name="_method" value="put" />
+    <textarea type="text" name="data"><%= @current_answer.data %></textarea>
+    <input type="submit" name="name" value="submit">
+  </form>
+</div>

@@ -11,7 +11,7 @@ end
 
 get '/user/profile' do
   if logged_in?
-    @current_user = User.find(session[:user_id])
+    @current_user
     erb :"users/profile"
   else
     @error_msg = "You must log-in first to view your profile!"
@@ -21,7 +21,7 @@ end
 
 get '/user/home' do
   if logged_in?
-    @current_user = User.find(session[:user_id])
+    @current_user
     @all_questions = Question.all
     erb :"users/home"
   else

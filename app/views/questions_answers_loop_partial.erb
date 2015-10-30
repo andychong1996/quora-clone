@@ -5,16 +5,24 @@
       <h3><%= @question.data %></h3>
     </a>
     Author: <%=@question.user.first_name%>
+    <a href="/questions/<%= @question.id %>/edit"><button type="button" name="button">edit</button></a>
+    <form class="" action="/questions/<%= @question.id %>" method="post">
+      <input type="hidden" name="_method" value="delete" />
+      <input type="submit" name="name" value="delete">
+    </form>
   </div>
-  <span>
-    <form class="" action="/question/<%= @question.id %>/upvote" method="post">
-      <button type="submit" name="button">UP VOTE</button>
-    </form>
-    <!-- number of votes here -->
-    <form class="" action="/question/<%= @question.id %>/downvote" method="post">
-      <button type="submit" name="button">DOWN VOTE</button>
-    </form>
-  </span>
+  <%if logged_in?%>
+    <span>
+      <form class="" action="/questions/<%= @question.id %>/upvote" method="post">
+        <button type="submit" name="button">UP VOTE</button>
+        <span><%= @question.question_votes.where(votes_count: 1).count %></span>
+      </form>
+      <form class="" action="/questions/<%= @question.id %>/downvote" method="post">
+        <button type="submit" name="button">DOWN VOTE</button>
+        <span><%= @question.question_votes.where(votes_count: -1).count %></span>
+      </form>
+    </span>
+  <%end%>
 
   <div>
     <h4>Answers:</h4>
@@ -22,21 +30,28 @@
       <% @question.answers.each do |answer| %>
         <li><%= answer.data%></li>
           <ul>Author: <%=answer.user.first_name%>
-            <span>
-              <form class="" action="/answer/<%= answer.id %>/upvote" method="post">
-                <button type="submit" name="button">UP VOTE</button>
-              </form>
-              <!-- number of votes here -->
-              <form class="" action="/answer/<%= answer.id %>/downvote" method="post">
-                <button type="submit" name="button">DOWN VOTE</button>
-              </form>
-            </span>
+            <a href="/answers/<%= answer.id %>/edit"><button type="button" name="button">edit</button></a>
+            <form class="" action="/answers/<%= answer.id %>" method="post">
+              <input type="hidden" name="_method" value="delete" />
+              <input type="submit" name="name" value="delete">
+            </form>
+            <%if logged_in?%>
+              <span>
+                <form class="" action="/answers/<%= answer.id %>/upvote" method="post">
+                  <button type="submit" name="button">UP VOTE</button>
+                  <span><%= answer.answer_votes.where(votes_count: 1).count %></span>
+                </form>
+                <!-- number of votes here -->
+                <form class="" action="/answers/<%= answer.id %>/downvote" method="post">
+                  <button type="submit" name="button">DOWN VOTE</button>
+                  <span><%= answer.answer_votes.where(votes_count: -1).count %></span>
+                </form>
+              </span>
+            <%end%>
           </ul>
       <% end %>
     </ol>
   </div>
-
-
 
   <%if logged_in?%>
     <form action="/question/<%= @question.id %>/answers/create" method="post">
