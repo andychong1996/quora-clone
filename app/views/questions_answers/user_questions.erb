@@ -5,7 +5,7 @@
 <div>
   <% @current_user.questions.each do |question| %>
     <% @question = question %>
-    <%= erb :questions_loop %>
+    <%= erb :questions_answers_loop_partial %>
   <% end %>
 </div>
 

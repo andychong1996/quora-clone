@@ -1,0 +1,51 @@
+<li>
+
+
+  <div>
+    <a href="/questions/<%=@question.id%>">
+      <h3><%= @question.data %></h3>
+    </a>
+    Author: <%=@question.user.first_name%>
+  </div>
+  <span>
+    <form class="" action="/question/<%= @question.id %>/upvote" method="post">
+      <button type="submit" name="button">UP VOTE</button>
+    </form>
+    <!-- number of votes here -->
+    <form class="" action="/question/<%= @question.id %>/downvote" method="post">
+      <button type="submit" name="button">DOWN VOTE</button>
+    </form>
+  </span>
+
+  <div>
+    <h4>Answers:</h4>
+    <ol>
+      <% @question.answers.each do |answer| %>
+        <li><%= answer.data%></li>
+          <ul>Author: <%=answer.user.first_name%>
+            <span>
+              <form class="" action="/answer/<%= answer.id %>/upvote" method="post">
+                <button type="submit" name="button">UP VOTE</button>
+              </form>
+              <!-- number of votes here -->
+              <form class="" action="/answer/<%= answer.id %>/downvote" method="post">
+                <button type="submit" name="button">DOWN VOTE</button>
+              </form>
+            </span>
+          </ul>
+      <% end %>
+    </ol>
+  </div>
+
+
+
+  <%if logged_in?%>
+    <form action="/question/<%= @question.id %>/answers/create" method="post">
+        <input type="text" name="answer[data]" placeholder="Insert your answer here" required>
+        <button type="submit" name="button">Post</button>
+    </form>
+  <%else%>
+  <a href="/"><button type="button" name="button">Please Log In To Post Answer</button></a>
+  <%end%>
+
+</li>
