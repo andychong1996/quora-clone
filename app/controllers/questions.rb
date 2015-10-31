@@ -42,12 +42,12 @@ post '/questions/:question_id/upvote' do
   new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], votes_count: 1)
   if new_question_vote.valid?
     new_question_vote.save
-    redirect to "/questions/#{params[:question_id]}"
+    redirect to "/user/home"
   elsif current_user.question_votes.find_by(question_id: params[:question_id]).votes_count == -1
     current_user.question_votes.find_by(question_id: params[:question_id]).update(votes_count: 1)
-    redirect to "/questions/#{params[:question_id]}"
+    redirect to "/user/home"
   else
-    redirect to "/questions/#{params[:question_id]}"
+    redirect to "/user/home"
   end
 end
 
@@ -55,12 +55,12 @@ post '/questions/:question_id/downvote' do
   new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], votes_count: -1)
   if new_question_vote.valid?
     new_question_vote.save
-    redirect to "/questions/#{params[:question_id]}"
+    redirect to "/user/home"
   elsif current_user.question_votes.find_by(question_id: params[:question_id]).votes_count == 1
     current_user.question_votes.find_by(question_id: params[:question_id]).update(votes_count: -1)
-    redirect to "/questions/#{params[:question_id]}"
+    redirect to "/user/home"
   else
-    redirect to "/questions/#{params[:question_id]}"
+    redirect to "/user/home"
   end
 
 end

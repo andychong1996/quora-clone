@@ -16,12 +16,12 @@ post '/answers/:answer_id/upvote' do
 
   if new_answer_vote.valid?
     new_answer_vote.save
-    redirect to "/questions/#{question_id}"
+    redirect to "/user/home"
   elsif current_user.answer_votes.find_by(answer_id: params[:answer_id]).votes_count == -1
     current_user.answer_votes.find_by(answer_id: params[:answer_id]).update(votes_count: 1)
-    redirect to "/questions/#{question_id}"
+    redirect to "/user/home"
   else
-    redirect to "/questions/#{question_id}"
+    redirect to "/user/home"
   end
 end
 
@@ -30,12 +30,12 @@ post '/answers/:answer_id/downvote' do
   new_answer_vote = AnswerVote.new(user_id: current_user.id, answer_id: params[:answer_id], votes_count: -1)
   if new_answer_vote.valid?
     new_answer_vote.save
-    redirect to "/questions/#{question_id}"
+    redirect to "/user/home"
   elsif current_user.answer_votes.find_by(answer_id: params[:answer_id]).votes_count == 1
     current_user.answer_votes.find_by(answer_id: params[:answer_id]).update(votes_count: -1)
-    redirect to "/questions/#{question_id}"
+    redirect to "/user/home"
   else
-    redirect to "/questions/#{question_id}"
+    redirect to "/user/home"
   end
 end
 
