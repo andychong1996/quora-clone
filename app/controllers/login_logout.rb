@@ -1,11 +1,11 @@
-get '/' do
+get '/login' do
   if logged_in?
     redirect to '/user/home'
   else
     unless params[:error].nil?
       @error = params[:error]
     end
-    erb :"static/index", layout: :login_signup_layout
+    erb :"static/login", layout: :login_signup_layout
   end
 end
 

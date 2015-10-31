@@ -16,7 +16,11 @@ end
 
 get '/questions/:question_id' do
   @current_question = Question.find(params[:question_id])
-  erb :"questions_answers/one_question"
+  if logged_in?
+    erb :"questions_answers/one_question"
+  else
+    erb :"questions_answers/one_question", layout: :visitors_layout
+  end
 end
 
 get '/:user_id/questions' do
@@ -34,7 +38,7 @@ get'/:user_id/questions_answered' do
   end
 end
 
-post '/question/:question_id/upvote' do
+post '/questions/:question_id/upvote' do
   new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], votes_count: 1)
   if new_question_vote.valid?
     new_question_vote.save
@@ -47,7 +51,7 @@ post '/question/:question_id/upvote' do
   end
 end
 
-post '/question/:question_id/downvote' do
+post '/questions/:question_id/downvote' do
   new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], votes_count: -1)
   if new_question_vote.valid?
     new_question_vote.save

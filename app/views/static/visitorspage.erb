@@ -1,0 +1,16 @@
+<head>
+  <h1>Hi, Welcome To Quorora</h1>
+</head>
+
+<div>
+  <h2>Top Stories:</h2>
+  <div>
+    <% @all_questions.each do |question| %>
+      <% @question = question %>
+      <%= erb :questions_answers_loop_partial %>
+    <% end %>
+  </div>
+</div>
+
+<footer>
+</footer>

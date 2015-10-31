@@ -3,7 +3,7 @@ post '/question/:question_id/answers/create' do
     current_question = Question.find(params[:question_id])
     current_answer = current_question.answers.new(data: params[:answer][:data],user_id: current_user.id)
     current_answer.save
-    redirect '/questions'
+    redirect to "/questions/#{params[:question_id]}"
   else
     @error_msg = "Please log in before add any answer"
     redirect to "/?error=#{@error_msg}"
