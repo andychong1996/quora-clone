@@ -39,28 +39,30 @@ get'/:user_id/questions_answered' do
 end
 
 post '/questions/:question_id/upvote' do
-  new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], votes_count: 1)
+  new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], vote_type: 1)
   if new_question_vote.valid?
     new_question_vote.save
-    redirect to "/user/home"
-  elsif current_user.question_votes.find_by(question_id: params[:question_id]).votes_count == -1
-    current_user.question_votes.find_by(question_id: params[:question_id]).update(votes_count: 1)
-    redirect to "/user/home"
+    redirect to "/users/#{current_user.id}/home"
+  elsif current_user.question_votes.find_by(question_id: params[:question_id]).vote_type == -1
+    current_user.question_votes.find_by(question_id: params[:question_id]).update(vote_type: 1)
+    redirect to "/users/#{current_user.id}/home"
   else
-    redirect to "/user/home"
+    current_user.question_votes.find_by(question_id: params[:question_id]).update(vote_type: 0)
+    redirect to "/users/#{current_user.id}/home"
   end
 end
 
 post '/questions/:question_id/downvote' do
-  new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], votes_count: -1)
+  new_question_vote = QuestionVote.new(user_id: current_user.id, question_id: params[:question_id], vote_type: -1)
   if new_question_vote.valid?
     new_question_vote.save
-    redirect to "/user/home"
-  elsif current_user.question_votes.find_by(question_id: params[:question_id]).votes_count == 1
-    current_user.question_votes.find_by(question_id: params[:question_id]).update(votes_count: -1)
-    redirect to "/user/home"
+    redirect to "/users/#{current_user.id}/home"
+  elsif current_user.question_votes.find_by(question_id: params[:question_id]).vote_type == 1
+    current_user.question_votes.find_by(question_id: params[:question_id]).update(vote_type: -1)
+    redirect to "/users/#{current_user.id}/home"
   else
-    redirect to "/user/home"
+    current_user.question_votes.find_by(question_id: params[:question_id]).update(vote_type: 0)
+    redirect to "/users/#{current_user.id}/home"
   end
 
 end

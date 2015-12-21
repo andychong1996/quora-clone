@@ -12,8 +12,8 @@
     rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <a href="/user/home"><button type="button" name="home_button">Home</button></a>
-    <a href="/user/profile"><button type="button" name="button">Profile</button></a>
+    <a href="/users/<%=current_user.id%>/home"><button type="button" name="home_button">Home</button></a>
+    <a href="/users/<%=current_user.id%>/profile"><button type="button" name="button">Profile</button></a>
     <a href="/question/new"><button type="button" name="new_question_button">Create Question</button></a>
     <a href="/logout"><button type="text" name="logout_button">Log Out</button></a>
     <%=yield%>

@@ -19,11 +19,11 @@
     <span>
       <form class="" action="/questions/<%= @question.id %>/upvote" method="post">
         <button type="submit" name="button">UP VOTE</button>
-        <span><%= @question.question_votes.where(votes_count: 1).count %></span>
+        <span><%= @question.question_votes.where(vote_type: 1).count %></span>
       </form>
       <form class="" action="/questions/<%= @question.id %>/downvote" method="post">
         <button type="submit" name="button">DOWN VOTE</button>
-        <span><%= @question.question_votes.where(votes_count: -1).count %></span>
+        <span><%= @question.question_votes.where(vote_type: -1).count %></span>
       </form>
     </span>
   <%end%>
@@ -36,22 +36,25 @@
         <li><%= answer.data%></li>
           <ul>Author: <%=answer.user.first_name%>
             <%if logged_in?%>
-            <%if answer.user.id == current_user.id%>
-              <a href="/answers/<%= answer.id %>/edit"><button type="button" name="button">edit</button></a>
-              <form class="" action="/answers/<%= answer.id %>" method="post">
-                <input type="hidden" name="_method" value="delete" />
-                <input type="submit" name="name" value="delete">
-              </form>
-            <%end%>
+              <%if answer.user.id == current_user.id%>
+                <a href="/answers/<%= answer.id %>/edit"><button type="button" name="button">edit</button></a>
+                <form class="" action="/answers/<%= answer.id %>" method="post">
+                  <input type="hidden" name="_method" value="delete" />
+                  <input type="submit" name="name" value="delete">
+                </form>
+              <%end%>
               <span>
                 <form class="" action="/answers/<%= answer.id %>/upvote" method="post">
-                  <button type="submit" name="button">UP VOTE</button>
-                  <span><%= answer.answer_votes.where(votes_count: 1).count %></span>
+
+
+                    <button type="submit" name="button">UP VOTE</button>
+                
+                  <span><%= answer.answer_votes.where(vote_type: 1).count %></span>
                 </form>
                 <!-- number of votes here -->
                 <form class="" action="/answers/<%= answer.id %>/downvote" method="post">
                   <button type="submit" name="button">DOWN VOTE</button>
-                  <span><%= answer.answer_votes.where(votes_count: -1).count %></span>
+                  <span><%= answer.answer_votes.where(vote_type: -1).count %></span>
                 </form>
               </span>
             <%end%>

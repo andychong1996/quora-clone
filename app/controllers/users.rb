@@ -9,7 +9,7 @@ post '/user/create' do
   end
 end
 
-get '/user/profile' do
+get '/users/:id/profile' do
   if logged_in?
     @current_user
     erb :"users/profile"
@@ -19,7 +19,7 @@ get '/user/profile' do
   end
 end
 
-get '/user/home' do
+get '/users/:id/home' do
   if logged_in?
     @current_user
     @all_questions = Question.all
