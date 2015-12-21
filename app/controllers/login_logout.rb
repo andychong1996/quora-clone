@@ -13,7 +13,7 @@ post '/login' do
   @current_user = User.authenticate(params['user']['email'], params['user']['password'])
   if @current_user != nil
     session[:user_id] = @current_user.id
-    redirect to "/#{current_user.id}/home"
+    redirect to "/users/#{current_user.id}/home"
   else
     @error_msg = "email and password doesn't matched or account doesn't exist!"
     redirect to "/?error=#{@error_msg}"
